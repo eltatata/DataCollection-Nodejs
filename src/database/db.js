@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 
-try {
-    await mongoose.connect(process.env.URI);
-    console.log(`conectado a MongoDB`);
-} catch (error) {
-    console.log(`Error de conexion a DB: ${error}`);
-}
+export default mongoose.connect(process.env.URI)
+    .then((connection) => {
+        console.log('conectado a MongoDB');
+        return connection.connection.getClient();
+    })
+    .catch((error) => {
+        console.log(`Error de conexion a DB: ${error}`);
+    });

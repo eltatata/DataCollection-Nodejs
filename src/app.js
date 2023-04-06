@@ -4,9 +4,11 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import flash from "connect-flash";
 import csrf from 'csurf';
+import cors from "cors";
 import { create } from "express-handlebars";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -21,12 +23,34 @@ import authRouter from './routes/auth.router.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// read the connection with data base
+import db from "./database/db.js";
+
+// Configuration of cors
+const corsOptions = {
+    credentials: true,
+    origin: process.env.PATHRENDER || "*",
+    methods: ['GET', 'POST']
+}
+
+app.use(cors(corsOptions));
+
 // express-sesion setup
 app.use(session({
     name: 'session',
-    secret: 'secret-key',
+    secret: process.env.SESSION_SECRET || 'secret-key',
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        clientPromise: db,
+        dbName: process.env.DBNAME,
+    }),
+    cookie: {
+        secure: true,
+        sameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    },
+    proxy: true
 }));
 
 // passport setup
