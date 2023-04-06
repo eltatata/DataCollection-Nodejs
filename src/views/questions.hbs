@@ -1,0 +1,18 @@
+<main class="container">
+    <h2 class="text-center mt-3">Lista de preguntas</h2>
+    {{#if questions}}
+    {{#each questions}}
+    <div class="card my-3">
+        <div class="card-body">
+            <p><strong>Pregunta:</strong> {{this.question}}</p>
+            <p><strong>Respuesta:</strong> {{this.answer}}</p>
+            <div class="d-flex justify-content-end">
+                <a href="/delete/{{this._id}}" class="btn btn-danger">Borrar</a>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No hay elementos.</p>
+    {{/if}}
+</main>

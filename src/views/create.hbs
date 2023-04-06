@@ -1,0 +1,19 @@
+<main class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 p-5">
+            <h2 class="text-center">{{title}}</h2>
+            <form class="card card-body mt-3" action="/create" method="post">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                <div class="form-group">
+                    <label for="pregunta">Ingrese pregunta:</label>
+                    <input type="text" class="form-control" id="pregunta" name="question" required>
+                </div>
+                <div class="form-group">
+                    <label for="respuesta">Ingrese respuesta:</label>
+                    <textarea class="form-control" id="respuesta" name="answer" required rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </div>
+    </div>
+</main>
