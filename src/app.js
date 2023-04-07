@@ -1,5 +1,6 @@
 // import path from 'path';
-import path from 'node:path';
+// import path from 'node:path';
+import * as path from 'path';
 import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
