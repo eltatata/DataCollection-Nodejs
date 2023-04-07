@@ -72,14 +72,23 @@ passport.deserializeUser(async (user, done) => {
 });
 
 // view engine setup
+// const hbs = create({
+//     extname: ".hbs",
+//     layoutsDir: './src/views/layouts',
+//     partialsDir: "./src/views/components"
+// });
+// app.engine(".hbs", hbs.engine);
+// app.set('views', './src/views');
+// app.set('view engine', '.hbs');
+
 const hbs = create({
     extname: ".hbs",
-    layoutsDir: './src/views/layouts',
-    partialsDir: "./src/views/components"
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: [path.join(__dirname, "views/components")]
 });
 app.engine(".hbs", hbs.engine);
-app.set('views', './src/views');
-app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
