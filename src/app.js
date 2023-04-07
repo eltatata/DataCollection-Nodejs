@@ -71,16 +71,6 @@ passport.deserializeUser(async (user, done) => {
     return done(null, { id: admin._id, name: admin.username });
 });
 
-// view engine setup
-// const hbs = create({
-//     extname: ".hbs",
-//     layoutsDir: './src/views/layouts',
-//     partialsDir: "./src/views/components"
-// });
-// app.engine(".hbs", hbs.engine);
-// app.set('views', './src/views');
-// app.set('view engine', '.hbs');
-
 const hbs = create({
     extname: ".hbs",
     layoutsDir: path.join(__dirname, 'views/layouts'),
